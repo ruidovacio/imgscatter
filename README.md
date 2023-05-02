@@ -1,2 +1,2 @@
 # imgscatter
-image glitching api
+image processing api
