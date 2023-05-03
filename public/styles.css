@@ -1,0 +1,37 @@
+body{
+    background-color:lightpink;
+}
+
+.pagina{
+    text-align: center;
+    font-family: monospace;
+    margin-top: 7rem;
+}
+
+h1{
+    color: beige;
+    text-shadow: 0.2rem 0.2rem black;
+}
+
+.input{
+    background-color: beige;
+    margin: 0 auto;
+    width: 30%;
+    border: 0.1rem;
+    border-radius: 0.5rem;
+    border-style: solid;
+    border-color: gray;
+    box-shadow: 0.5rem 0.5rem;
+}
+
+form{
+    margin-top: 0.5rem;
+    line-height: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+    .input{
+        width: 90%;
+    }
+  }

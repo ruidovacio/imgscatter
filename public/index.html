@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>imgscatter</title>
-</head>
-<body>
-    <form action="/scatter" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*">
-        <input type="submit" value="upload">
-      </form>
-</body>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+
+  <body>
+    <div class="pagina">
+      <h1>ruido_scatter</h1>
+      <div class="input">
+        <form action=" /scatter" method="post" enctype="multipart/form-data">
+          <input type="file" name="image" accept="image/*" /><br>
+          <input type="radio" id="style1" name="style" value="style1">
+          <label for="style1">style1</label>
+          <input type="radio" id="style2" name="style" value="style2">
+          <label for="style2">style2</label>
+          <input type="radio" id="style3" name="style" value="style3">
+          <label for="style3">style3</label><br>
+          <input type="range" min="2" max="10" value="2" class="slider" id="grid"><br>
+          <input type="submit" value="upload" />
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
