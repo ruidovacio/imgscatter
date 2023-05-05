@@ -1,13 +1,15 @@
 const form = document.getElementById("form");
 const image = document.getElementById("image");
-const checkboxes = form.querySelectorAll('input[type="checkbox"][name="options"]');
 let canUpload = false;
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
   if (canUpload) {
     const gridSize = document.getElementById("grid").value;
-    form.action = `/scatter?grid=${gridSize}&repeat=${checkboxes[0].checked}&color=${checkboxes[1].checked}`;
+    const style = document.querySelector('input[type="radio"][name="style"]:checked').value;
+    const checkboxes = form.querySelectorAll('input[type="checkbox"][name="options"]');
+    form.action = `/scatter?grid=${gridSize}&style=${style}&repeat=${checkboxes[0].checked}`;
+    console.log(form.action);
     form.submit();
   }
 });
