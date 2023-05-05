@@ -12,18 +12,24 @@
     <div class="pagina">
       <h1>ruido_scatter</h1>
       <div class="input">
-        <form action=" /scatter" method="post" enctype="multipart/form-data">
-          <input type="file" name="image" accept="image/*" /><br>
-          <input type="radio" id="style1" name="style" value="style1">
-          <label for="style1">style1</label>
+        <form method="post" enctype="multipart/form-data" id="form">
+          <input type="file" id="image" name="image" accept="image/*" /><br>
+          <!-- <input type="radio" id="style1" name="style" value="style1" checked>
+          <label for="style1">option1</label>
           <input type="radio" id="style2" name="style" value="style2">
           <label for="style2">style2</label>
           <input type="radio" id="style3" name="style" value="style3">
-          <label for="style3">style3</label><br>
-          <input type="range" min="2" max="10" value="2" class="slider" id="grid"><br>
-          <input type="submit" value="upload" />
+          <label for="style3">style3</label><br> -->
+          <input type="checkbox" id="option1" name="options" value="repeat">
+          <label for="option1">repeat</label>
+          <input type="checkbox" id="option2" name="options" value="color">
+          <label for="option2">color</label><br>
+          <input class="slider" type="range" min=2 max=10 value=6  id="grid"><br>
+          <input type="submit" value="upload" id="upload" />
         </form>
       </div>
+      <p id="warning" class="warning">The image should be less than 1mb.</p>
     </div>
+    <script src="./main.js"></script>
   </body>
 </html>

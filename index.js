@@ -34,7 +34,8 @@ app.use(express.static(__dirname + "/public"));
 //routes
 app.post("/scatter", upload.single("image"), async (req, res, next) => {
   try {
-    const process = await ruido(req.file.buffer);
+    console.log(req.query);
+    const process = await ruido(req.file.buffer, req.query);
     const result = Buffer.from(process).toString("base64");
     const html = `<img src="data:image/jpeg;base64,${result}">`;
     res.set("Content-Type", "text/html");
