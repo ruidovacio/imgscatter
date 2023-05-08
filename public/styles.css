@@ -1,40 +1,67 @@
-body{
-    background-color:lightpink;
+body {
+  /* background-size: 60px 60px;
+  background-image: linear-gradient(
+      to right,
+      rgb(251, 199, 207) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgb(251, 199, 207) 1px, transparent 1px); */
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, lightpink, lightcoral);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.pagina{
-    text-align: center;
-    font-family: monospace;
-    margin-top: 7rem;
+html{
+    height: 100%;
 }
 
-h1{
-    color: beige;
-    text-shadow: 0.2rem 0.2rem black;
+.pagina {
+  text-align: center;
+  font-family: monospace;
+  margin-top: 2rem;
 }
 
-.input{
-    background-color: beige;
-    margin: 0 auto;
-    width: 30%;
-    border: 0.1rem;
-    border-radius: 0.5rem;
-    border-style: solid;
-    border-color: gray;
-    box-shadow: 0.5rem 0.5rem;
+h1 {
+  color: beige;
+  text-shadow: 0.2rem 0.2rem black;
 }
 
-form{
-    margin-top: 0.5rem;
-    line-height: 1.8rem;
-    margin-bottom: 0.5rem;
+.input {
+  background-color: beige;
+  margin: 0 auto;
+  width: 30%;
+  border: 0.1rem;
+  border-radius: 0.5rem;
+  border-style: solid;
+  border-color: gray;
+  box-shadow: 0.5rem 0.5rem;
 }
 
-.warning{
-    margin-top: 2rem;
+form {
+  margin-top: 0.5rem;
+  line-height: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+#result {
+  margin-top: 3rem;
+}
+
+.resultimage {
+  border: 0.1rem;
+  border-radius: 0.5rem;
+  border-style: solid;
+  border-color: gray;
+  box-shadow: 0.5rem 0.5rem;
+}
+
+.warning {
+  margin-top: 2rem;
 }
 @media only screen and (max-width: 600px) {
-    .input{
-        width: 90%;
-    }
+  .input {
+    width: 90%;
   }
+}

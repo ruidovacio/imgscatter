@@ -1,6 +1,18 @@
 const sharp = require("sharp");
 const shuffle = require("shuffle-array");
 
+// async function ruido(input, queries) {
+//   console.log(await sharp(input).metadata());
+//   console.log(`queries: ${queries.size}`);
+//   const img = await sharp(input)
+//     .resize({width: 300, height: 300})
+//     .negate()
+//     .webp()
+//     .toBuffer();
+//   return img;
+// }
+// module.exports = ruido;
+
 async function ruido(input, queries) {
   //cargar imagen y llevar a 300px
   const img = await sharp(input).resize({width: 300, height: 300}).toBuffer();
@@ -10,9 +22,9 @@ async function ruido(input, queries) {
 
   //base de la grilla y unidad
   let module = [];
-  let gridSize = queries.grid;
-  let artStyle = queries.style;
-  let shouldRepeat = queries.repeat;
+  let gridSize = queries.grid == undefined ? 2 : queries.grid;
+  let artStyle = queries.style == undefined ? "basic" : queries.style;
+  let shouldRepeat = queries.repeat == undefined ? false : queries.repeat;
   let unit = Math.trunc(300 / gridSize);
 
   //recorte inicial
@@ -25,9 +37,12 @@ async function ruido(input, queries) {
         .webp()
         .toBuffer();
       const chance = Math.random();
-      //alterar cada recorte individual
-      if (chance > 0.8) {
-        trim = await sharp(trim).modulate({saturation: 0}).toBuffer();
+      // alterar cada recorte individual
+      if (chance > 0.5) {
+        trim = await sharp(trim)
+        // .modulate({saturation: 0})
+        .rotate(90)
+        .toBuffer();
       }
       row.push(trim);
     }
@@ -93,8 +108,17 @@ async function ruido(input, queries) {
       .sharpen({sigma: 3, m1: 200, m2: 50})
       .threshold(128)
       .composite([{input: base, top: 0, left: 0, blend: "difference"}])
-      .modulate({lightness:10})
+      .modulate({lightness: 10})
       .negate()
+      .webp()
+      .toBuffer();
+    return post;
+  } else if (artStyle === "ultrawave") {
+    const post = await sharp(base)
+      .blur(10)
+      .sharpen({sigma: 5, m1: 20, m2: 5})
+      .clahe({width:30,height:3})
+      .rotate(90)
       .webp()
       .toBuffer();
     return post;

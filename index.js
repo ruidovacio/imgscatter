@@ -4,6 +4,7 @@ const app = express();
 
 //middleware
 const sharp = require("sharp");
+const cors = require("cors");
 const multer = require("multer");
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -14,7 +15,6 @@ const upload = multer({
 });
 
 function fileFilter(req, file, cb) {
-  console.log(file);
   console.log(`size: ${req.headers["content-length"]}`);
   if (req.headers["content-length"] > upload.limits.fileSize) {
     console.log("bad file size");
@@ -25,8 +25,8 @@ function fileFilter(req, file, cb) {
   }
 }
 
-
-const ruido = require("./scatter.js")
+const ruido = require("./scatter.js");
+app.use(cors());
 
 //static
 app.use(express.static(__dirname + "/public"));
@@ -34,18 +34,17 @@ app.use(express.static(__dirname + "/public"));
 //routes
 app.post("/scatter", upload.single("image"), async (req, res, next) => {
   try {
-    console.log(req.query);
+    console.log("imagen recibida");
     const process = await ruido(req.file.buffer, req.query);
-    const result = Buffer.from(process).toString("base64");
-    const html = `<img src="data:image/jpeg;base64,${result}">`;
-    res.set("Content-Type", "text/html");
-
-    res.send(html);
+    //const result = Buffer.from(process).toString("base64");
+    // const html = `<img src="data:image/jpeg;base64,${result}">`;
+    // res.set("Content-Type", "text/html");
+    res.send(process);
+    //}
   } catch (err) {
     next(err);
   }
 });
-
 
 //server
 app.listen(3000, () => {

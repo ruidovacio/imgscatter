@@ -13,20 +13,23 @@
       <h1>img_scatter</h1>
       <div class="input">
         <form method="post" enctype="multipart/form-data" id="form">
-          <input type="file" id="image" name="image" accept="image/*" /><br>
+          <input type="file" id="imageSource" name="imageSource" accept="image/*" /><br>
           <input type="radio" id="style1" name="style" value="basic">
           <label for="style1">basic</label>
           <input type="radio" id="style2" name="style" value="begotten">
           <label for="style2">begotten</label>
           <input type="radio" id="style3" name="style" value="ripples">
-          <label for="style3">ripples</label><br>
-          <input class="slider" type="range" min=2 max=10 value=6  id="grid"><br>
+          <label for="style3">ripples</label>
+          <input type="radio" id="style4" name="style" value="ultrawave">
+          <label for="style4">ultrawave</label><br>
+          <input class="slider" type="range" min=2 max=6 value=3  id="grid"><br>
           <input type="checkbox" id="option1" name="options" value="repeat">
           <label for="option1">repeat</label><br>
           <input type="submit" value="upload" id="upload" />
         </form>
       </div>
       <p id="warning" class="warning">The image should be less than 1mb.</p>
+      <div id="result"></div>
     </div>
     <script src="./main.js"></script>
   </body>
