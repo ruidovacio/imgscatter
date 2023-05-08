@@ -36,7 +36,7 @@ async function scatterImage(imageFile, url) {
   // const blob = await imageFile.blob();
   const formData = new FormData();
   formData.append("image", imageFile);
-  const response = await fetch(`http://localhost:3000${url}`, {
+  const response = await fetch(`${url}`, {
     method: "POST",
     body: formData,
   });
