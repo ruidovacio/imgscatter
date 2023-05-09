@@ -1,6 +1,5 @@
 const sharp = require("sharp");
 const shuffle = require("shuffle-array");
-const randomHex = require("random-hex");
 
 async function glitch(input, queries) {
   //cargar imagen y llevar a 300px
@@ -82,9 +81,7 @@ async function glitch(input, queries) {
         .toBuffer();
     }
   }
-  console.log(artStyle);
-  //filtros finales
-  //1. basic 2. begotten
+  //filtros
   if (artStyle === "scatter") {
     const post = await sharp(base)
       .webp()
@@ -142,30 +139,3 @@ async function glitch(input, queries) {
 }
 
 module.exports = glitch;
-
-//styles
-//ultrawaves (negate en random trim al iniciar)
-// const post = await sharp(base)
-// .blur(30)
-// .sharpen({sigma: 3, m1: 200, m2: 50})
-// .threshold(128)
-// .webp()
-// .toBuffer();
-
-// grietas
-// const post = await sharp(base)
-// .blur(30)
-// .median(20)
-// .sharpen({sigma: 1, m1: 200, m2: 500})
-// // .threshold(128)
-// .webp()
-// .toBuffer();
-
-//ripples
-// const post = await sharp(base)
-// .blur(30)
-// .median(2)
-// .sharpen({sigma: 10, m1: 200, m2: 500})
-// // .threshold(128)
-// .webp()
-// .toBuffer();

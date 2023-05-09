@@ -25,7 +25,7 @@ function fileFilter(req, file, cb) {
   }
 }
 
-const glitch = require("./scatter.js");
+const glitch = require("./src/scatter.js");
 app.use(cors());
 
 //static
@@ -34,22 +34,38 @@ app.use(express.static(__dirname + "/public"));
 //routes
 app.post("/scatter", upload.single("image"), async (req, res, next) => {
   try {
-    console.log("imagen recibida");
-    const process = await glitch(req.file.buffer, req.query);
-    //const result = Buffer.from(process).toString("base64");
-    // const html = `<img src="data:image/jpeg;base64,${result}">`;
-    // res.set("Content-Type", "text/html");
-    res.send(process);
-    //}
+    const sendBuffer = await parseFile(req);
+    const process = await glitch(sendBuffer, req.query);
+    const dataUrl = `data:image/webp;base64,${process.toString("base64")}`;
+    res.send(dataUrl);
   } catch (err) {
     next(err);
   }
+});
+
+app.get("/documentation", (req, res) => {
+  res.sendFile(__dirname + "/public/documentation.html");
 });
 
 //server
 app.listen(3000, () => {
   console.log("Escuchando en 3000...");
 });
+
+//helpers
+async function parseFile(req) {
+  if (req.file == undefined) {
+    console.log("string recibido");
+    const fetchImage = await fetch(req.body.image);
+    const blob = await fetchImage.blob();
+    const buffer = await blob.arrayBuffer();
+    return buffer;
+  } else {
+    console.log("imagen recibido");
+    const buffer = req.file.buffer;
+    return buffer;
+  }
+}
 
 //export
 module.exports = app;

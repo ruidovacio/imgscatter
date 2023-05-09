@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>imgscatter</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://upload.wikimedia.org/wikipedia/commons/9/9f/Alien-smiley.svg"
+    />
+  </head>
+  <body>
+    <div class="linkbar">
+      <a href="/">[imgscatter] </a>
+      <a href="https://github.com/ruidovacio/imgscatter">[github] </a>
+    </div>
+    <div class="documentation">
+      <h1>documentation</h1>
+      <!-- <p>
+        the main entry point for the api is
+        https://imgscatter.vercel.app/scatter, which can be queried with some
+        parameters to get the desired effect. <br />
+        this can be done on your client side using a fetch request, like so.
+        <br />first create a FormData
+      </p> -->
+      <!-- <div class="showcode">
+      <code>
+        <p>const queries = "?grid=4&style=ride&repeat=false"</p><br>
+        <p>async function getData(imageFile){</p>
+        <p>&nbsp;const formData = new FormData();</p>
+        <p>&nbsp;formData.append("image", imageFile);</p>
+        <p>&nbsp;const response = await fetch(`https://imgscatter.vercel.app/scatter/${queries}`, {</p>
+        <p>&nbsp;&nbsp;method: "POST",</p>
+        <p>&nbsp;&nbsp;body: formData,</p>
+        <p>&nbsp;});</p>
+        <p>&nbsp;const parsedImage = await response.blob()</p>
+        <p>&nbsp;//after here you can do as you please with the obtained image</p>
+        <p>&nbsp;//such as DOM manipulation or anything you want</p>
+        <p>}</p>
+      </code>
+    </div> -->
+      <h2>parameters</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>query</th>
+            <th>value</th>
+            <th>effect</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>grid</td>
+            <td>integer</td>
+            <td>amount of slices to divide the image into</td>
+          </tr>
+          <tr>
+            <td rowspan="5">style</td>
+            <td>scatter</td>
+            <td>
+              basic effect, slices the image n times and randomizes the result
+              in a grid.
+            </td>
+          </tr>
+          <tr>
+            <td>begotten</td>
+            <td>like the cult classic 1990 horror film</td>
+          </tr>
+          <tr>
+            <td>ripples</td>
+            <td>lorem ipsum</td>
+          </tr>
+          <tr>
+            <td>ultrawave</td>
+            <td>lorem ipsum</td>
+          </tr>
+          <tr>
+            <td>ride</td>
+            <td>lorem ipsum</td>
+          </tr>
+          <tr>
+            <td>repeat</td>
+            <td>boolean</td>
+            <td>
+              decide if the slices will be repeated during the compositing
+              process
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <p>
+        for example, a query of /scatter?grid=4&style=ride&repeat=false should
+        produce an image like this one.
+      </p>
+      <p>
+        not including the queries will default the result to "scatter" on a 2x2
+        grid without repetition.
+      </p> -->
+    </div>
+  </body>
+</html>

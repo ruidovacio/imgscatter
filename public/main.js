@@ -33,24 +33,16 @@ image.addEventListener("change", (event) => {
 });
 
 async function scatterImage(imageFile, url) {
-  // const blob = await imageFile.blob();
   const formData = new FormData();
   formData.append("image", imageFile);
   const response = await fetch(`${url}`, {
     method: "POST",
     body: formData,
   });
-  const parsedImage = await response.blob();
-  const parsedURL = URL.createObjectURL(parsedImage);
-
-  const imageElement = document.createElement("img");
-  const sourceElement = document.createElement("source");
-
-  imageElement.src = parsedURL;
-  imageElement.classList.add("resultimage")
-  sourceElement.srcset = parsedURL;
-  sourceElement.type = "image/webp";
-
+  const data = await response.text();
+  const createdImage = document.createElement("img");
+  createdImage.src = data;
+  createdImage.classList.add("resultimage")
   result.innerHTML = "";
-  result.appendChild(imageElement);
+  result.appendChild(createdImage);
 }
