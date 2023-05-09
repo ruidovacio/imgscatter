@@ -1,5 +1,7 @@
 ## imgscatter
+
 ![imgscatter](https://raw.githubusercontent.com/ruidovacio/imgscatter/main/public/imgs/glitch3.webp)
+
 **about**
 i make visuals based on textures so i thought it'd be cool to implement a code solution that could emulate some of my work which you can check on my giphy page 👽
 
