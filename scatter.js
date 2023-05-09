@@ -2,19 +2,7 @@ const sharp = require("sharp");
 const shuffle = require("shuffle-array");
 const randomHex = require("random-hex");
 
-// async function ruido(input, queries) {
-//   console.log(await sharp(input).metadata());
-//   console.log(`queries: ${queries.size}`);
-//   const img = await sharp(input)
-//     .resize({width: 300, height: 300})
-//     .negate()
-//     .webp()
-//     .toBuffer();
-//   return img;
-// }
-// module.exports = ruido;
-
-async function ruido(input, queries) {
+async function glitch(input, queries) {
   //cargar imagen y llevar a 300px
   const img = await sharp(input).resize({width: 300, height: 300}).toBuffer();
   const meta = await sharp(input).metadata();
@@ -24,7 +12,7 @@ async function ruido(input, queries) {
   //base de la grilla y unidad
   let module = [];
   let gridSize = queries.grid == undefined ? 2 : queries.grid;
-  let artStyle = queries.style == undefined ? "basic" : queries.style;
+  let artStyle = queries.style == undefined ? "scatter" : queries.style;
   let shouldRepeat = queries.repeat == undefined ? false : queries.repeat;
   let unit = Math.trunc(300 / gridSize);
 
@@ -97,7 +85,7 @@ async function ruido(input, queries) {
   console.log(artStyle);
   //filtros finales
   //1. basic 2. begotten
-  if (artStyle === "basic") {
+  if (artStyle === "scatter") {
     const post = await sharp(base)
       .webp()
       .toBuffer();
@@ -153,7 +141,7 @@ async function ruido(input, queries) {
   }
 }
 
-module.exports = ruido;
+module.exports = glitch;
 
 //styles
 //ultrawaves (negate en random trim al iniciar)

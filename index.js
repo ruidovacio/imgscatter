@@ -25,7 +25,7 @@ function fileFilter(req, file, cb) {
   }
 }
 
-const ruido = require("./scatter.js");
+const glitch = require("./scatter.js");
 app.use(cors());
 
 //static
@@ -35,7 +35,7 @@ app.use(express.static(__dirname + "/public"));
 app.post("/scatter", upload.single("image"), async (req, res, next) => {
   try {
     console.log("imagen recibida");
-    const process = await ruido(req.file.buffer, req.query);
+    const process = await glitch(req.file.buffer, req.query);
     //const result = Buffer.from(process).toString("base64");
     // const html = `<img src="data:image/jpeg;base64,${result}">`;
     // res.set("Content-Type", "text/html");
