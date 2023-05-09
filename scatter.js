@@ -1,5 +1,6 @@
 const sharp = require("sharp");
 const shuffle = require("shuffle-array");
+const randomHex = require("random-hex");
 
 // async function ruido(input, queries) {
 //   console.log(await sharp(input).metadata());
@@ -40,9 +41,9 @@ async function ruido(input, queries) {
       // alterar cada recorte individual
       if (chance > 0.5) {
         trim = await sharp(trim)
-        // .modulate({saturation: 0})
-        .rotate(90)
-        .toBuffer();
+          // .modulate({saturation: 0})
+          .rotate(90)
+          .toBuffer();
       }
       row.push(trim);
     }
@@ -97,7 +98,9 @@ async function ruido(input, queries) {
   //filtros finales
   //1. basic 2. begotten
   if (artStyle === "basic") {
-    const post = await sharp(base).webp().toBuffer();
+    const post = await sharp(base)
+      .webp()
+      .toBuffer();
     return post;
   } else if (artStyle === "begotten") {
     const post = await sharp(base).threshold(128).negate().webp().toBuffer();
@@ -117,8 +120,33 @@ async function ruido(input, queries) {
     const post = await sharp(base)
       .blur(10)
       .sharpen({sigma: 5, m1: 20, m2: 5})
-      .clahe({width:30,height:3})
+      .clahe({width: 30, height: 3})
       .rotate(90)
+      .webp()
+      .toBuffer();
+    return post;
+  } else if (artStyle === "ride") {
+    const overlay = await sharp(base)
+      .rotate(90)
+      .blur(2)
+      .sharpen({sigma: 8, m1: 2, m2: 50})
+      .extract({left: 0, top: 0, width: 150, height: 150})
+      .resize({width: 300, height: 300})
+      .trim({
+        background: "white",
+        threshold: 42,
+      })
+      .toBuffer();
+    const post = await sharp(base)
+      .normalise(256)
+      .linear(0.5, 128)
+      .sharpen({sigma: 5, m1: 20, m2: 5})
+      .composite([{input: overlay, top: 0, left: 0, blend: "difference"}])
+      .modulate({
+        lightness: 20,
+        saturation: 255,
+      })
+      .sharpen({sigma: 1, m1: 20, m2: 50, x1: 10})
       .webp()
       .toBuffer();
     return post;
