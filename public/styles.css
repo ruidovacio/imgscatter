@@ -74,10 +74,11 @@ form {
 
 /* documentation page */
 .documentation {
-  margin: 2rem;
+  margin: 0 auto;
   background-color: beige;
   border-radius: 0.5rem;
   padding: 1rem;
+  width: 70%;
 }
 
 .documentation > h1 {
@@ -86,7 +87,8 @@ form {
 }
 
 .documentation > p {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  line-height: 1.2rem;
 }
 
 table {

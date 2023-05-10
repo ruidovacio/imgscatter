@@ -1,18 +1,18 @@
 const sharp = require("sharp");
 const shuffle = require("shuffle-array");
 
-async function glitch(input, queries) {
+async function glitch(input, query) {
   //cargar imagen y llevar a 300px
   const img = await sharp(input).resize({width: 300, height: 300}).toBuffer();
   const meta = await sharp(input).metadata();
   console.log(meta);
-  console.log(queries);
+  console.log(query);
 
   //base de la grilla y unidad
   let module = [];
-  let gridSize = queries.grid == undefined ? 2 : queries.grid;
-  let artStyle = queries.style == undefined ? "scatter" : queries.style;
-  let shouldRepeat = queries.repeat == undefined ? false : queries.repeat;
+  let gridSize = query.grid == undefined ? 2 : query.grid;
+  let artStyle = query.style == undefined ? "scatter" : query.style;
+  let shouldRepeat = query.repeat == undefined ? false : query.repeat;
   let unit = Math.trunc(300 / gridSize);
 
   //recorte inicial
@@ -82,12 +82,7 @@ async function glitch(input, queries) {
     }
   }
   //filtros
-  if (artStyle === "scatter") {
-    const post = await sharp(base)
-      .webp()
-      .toBuffer();
-    return post;
-  } else if (artStyle === "begotten") {
+if (artStyle === "begotten") {
     const post = await sharp(base).threshold(128).negate().webp().toBuffer();
     return post;
   } else if (artStyle === "ripples") {
@@ -134,6 +129,9 @@ async function glitch(input, queries) {
       .sharpen({sigma: 1, m1: 20, m2: 50, x1: 10})
       .webp()
       .toBuffer();
+    return post;
+  } else {
+    const post = await sharp(base).webp().toBuffer();
     return post;
   }
 }

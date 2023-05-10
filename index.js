@@ -34,8 +34,10 @@ app.use(express.static(__dirname + "/public"));
 //routes
 app.post("/scatter", upload.single("image"), async (req, res, next) => {
   try {
+    const sendQuery =
+      req.body.query == undefined ? req.query : JSON.parse(req.body.query);
     const sendBuffer = await parseFile(req);
-    const process = await glitch(sendBuffer, req.query);
+    const process = await glitch(sendBuffer, sendQuery);
     const dataUrl = `data:image/webp;base64,${process.toString("base64")}`;
     res.send(dataUrl);
   } catch (err) {

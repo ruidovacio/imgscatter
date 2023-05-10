@@ -19,30 +19,32 @@
     </div>
     <div class="documentation">
       <h1>documentation</h1>
-      <!-- <p>
-        the main entry point for the api is
-        https://imgscatter.vercel.app/scatter, which can be queried with some
-        parameters to get the desired effect. <br />
-        this can be done on your client side using a fetch request, like so.
-        <br />first create a FormData
-      </p> -->
+      <h2>base</h2>
+      <p>
+        API calls should be made as <b>POST</b> requests to this entry point:
+      </p>
+      <p>
+        <span style="border: 1px solid #ccc; padding: 5px"
+          >https://imgscatter.vercel.app/scatter</span
+        >
+      </p>
       <!-- <div class="showcode">
-      <code>
-        <p>const queries = "?grid=4&style=ride&repeat=false"</p><br>
-        <p>async function getData(imageFile){</p>
-        <p>&nbsp;const formData = new FormData();</p>
-        <p>&nbsp;formData.append("image", imageFile);</p>
-        <p>&nbsp;const response = await fetch(`https://imgscatter.vercel.app/scatter/${queries}`, {</p>
-        <p>&nbsp;&nbsp;method: "POST",</p>
-        <p>&nbsp;&nbsp;body: formData,</p>
-        <p>&nbsp;});</p>
-        <p>&nbsp;const parsedImage = await response.blob()</p>
-        <p>&nbsp;//after here you can do as you please with the obtained image</p>
-        <p>&nbsp;//such as DOM manipulation or anything you want</p>
-        <p>}</p>
-      </code>
-    </div> -->
+        <pre>
+        <code>
+        </code>
+      </pre>
+      </div> -->
+      <h2>images</h2>
+      <p>
+        Both URLs and manually uploaded images are accepted. The desired image
+        should be appended to a new FormData, which is then passed as the body
+        of the request. Please note that the image should be less than 1mb.
+      </p>
       <h2>parameters</h2>
+      <p>
+        You can include any of these as either an URL query, or an Object which
+        is appended to FormData.
+      </p>
       <table>
         <thead>
           <tr>
@@ -91,14 +93,47 @@
           </tr>
         </tbody>
       </table>
-      <!-- <p>
-        for example, a query of /scatter?grid=4&style=ride&repeat=false should
-        produce an image like this one.
-      </p>
       <p>
-        not including the queries will default the result to "scatter" on a 2x2
-        grid without repetition.
-      </p> -->
+        Parameters not included on the API call will be defaulted to a 2x2 grid
+        with the scatter style and no repetition.
+      </p>
+      <h3>Example using URL query</h3>
+      <span style="border: 1px solid #ccc; padding: 5px"
+        ><code
+          >https://imgscatter.vercel.app/scatter?grid=2&style=ride&repeat=false</code
+        ></span
+      >
+      <h3>Example using an object in JS</h3>
+      <span style="border: 1px solid #ccc; padding: 5px"
+        ><code
+          >const query = {grid: 6, style: ultrawave, repeat: true}</code
+        ></span
+      >
+      <p>
+        If you are using this method, remember to JSON.stringify() when you
+        append it to the FormData.
+      </p>
+      <h2>examples</h2>
+      <div class="showcode">
+        <pre><code>async function getImage() {
+  const sendForm = new FormData();
+  sendForm.append("image", "https://exampleimage.com");
+  const query = {grid: 5, style: "ride", repeat:false};
+  sendForm.append("query", JSON.stringify(query));
+
+  const response = await fetch("https://imgscatter.vercel.app/scatter",
+    {
+      method: "POST",
+      body: sendForm
+    }
+  );
+
+  //Then you can do as you wish with the response, for example
+  const data = await response.text();
+  //and then set this as the source of an image in your DOM
+  //to display the glitched image.
+}</code></pre>
+      </div>
     </div>
   </body>
 </html>
