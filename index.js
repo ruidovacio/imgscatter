@@ -36,7 +36,7 @@ app.post("/scatter", upload.single("image"), async (req, res, next) => {
   try {
     const sendQuery =
       req.body.query == undefined ? req.query : JSON.parse(req.body.query);
-    const sendBuffer = await parseFile(req);
+    const sendBuffer = req.file.buffer;
     const process = await glitch(sendBuffer, sendQuery);
     const dataUrl = `data:image/webp;base64,${process.toString("base64")}`;
     res.send(dataUrl);
@@ -54,20 +54,6 @@ app.listen(3000, () => {
   console.log("Escuchando en 3000...");
 });
 
-//helpers
-async function parseFile(req) {
-  if (req.file == undefined) {
-    console.log("string recibido");
-    const fetchImage = await fetch(req.body.image);
-    const blob = await fetchImage.blob();
-    const buffer = await blob.arrayBuffer();
-    return buffer;
-  } else {
-    console.log("imagen recibido");
-    const buffer = req.file.buffer;
-    return buffer;
-  }
-}
 
 //export
 module.exports = app;
