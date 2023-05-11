@@ -34,6 +34,7 @@ app.use(express.static(__dirname + "/public"));
 //routes
 app.post("/scatter", upload.single("image"), async (req, res, next) => {
   try {
+    //parsear si el query viene en el body o en la url
     const sendQuery =
       req.body.query == undefined ? req.query : JSON.parse(req.body.query);
     const sendBuffer = req.file.buffer;

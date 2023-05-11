@@ -91,6 +91,10 @@ form {
   line-height: 1.2rem;
 }
 
+.documentation > i{
+  font-size: smaller;
+}
+
 table {
   border-collapse: collapse;
   width: 60%;

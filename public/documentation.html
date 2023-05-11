@@ -18,32 +18,26 @@
       <a href="https://github.com/ruidovacio/imgscatter">[github] </a>
     </div>
     <div class="documentation">
-      <h1>documentation</h1>
+      <h1>api guide</h1>
       <h2>base</h2>
       <p>
-        API calls should be made as <b>POST</b> requests to this entry point:
+        Calls should be made as <b>POST</b> requests to this entry point:
       </p>
       <p>
         <span style="border: 1px solid #ccc; padding: 5px"
           >https://imgscatter.vercel.app/scatter</span
         >
       </p>
-      <!-- <div class="showcode">
-        <pre>
-        <code>
-        </code>
-      </pre>
-      </div> -->
       <h2>images</h2>
       <p>
-        Both URLs and manually uploaded images are accepted. The desired image
-        should be appended to a new FormData, which is then passed as the body
-        of the request. Please note that the image should be less than 1mb.
+        You need to encode your image (either an URL or locally uploaded) as FormData.
+        Append it as "image", and the pass the new FormData as the body of the POST request.
+        Please note that the image should be less than 1mb.
       </p>
       <h2>parameters</h2>
       <p>
-        You can include any of these as either an URL query, or an Object which
-        is appended to FormData.
+        These can be included either as an URL query, or as an Object which you can append as "query"
+        into the FormData.
       </p>
       <table>
         <thead>
@@ -73,15 +67,15 @@
           </tr>
           <tr>
             <td>ripples</td>
-            <td>lorem ipsum</td>
+            <td>edges spreading out on a surface</td>
           </tr>
           <tr>
             <td>ultrawave</td>
-            <td>lorem ipsum</td>
+            <td>corrupted beams of light</td>
           </tr>
           <tr>
             <td>ride</td>
-            <td>lorem ipsum</td>
+            <td>psychedelic image degradation</td>
           </tr>
           <tr>
             <td>repeat</td>
@@ -91,29 +85,34 @@
               process
             </td>
           </tr>
+          <tr>
+            <td colspan="3">
+              <i>Note that parameters not included on the API call will be defaulted to a 2x2 grid
+              with the scatter style and no repetition.</i>
+            </td>
+          </tr>
         </tbody>
       </table>
-      <p>
-        Parameters not included on the API call will be defaulted to a 2x2 grid
-        with the scatter style and no repetition.
-      </p>
-      <h3>Example using URL query</h3>
-      <span style="border: 1px solid #ccc; padding: 5px"
-        ><code
-          >https://imgscatter.vercel.app/scatter?grid=2&style=ride&repeat=false</code
-        ></span
-      >
-      <h3>Example using an object in JS</h3>
-      <span style="border: 1px solid #ccc; padding: 5px"
-        ><code
-          >const query = {grid: 6, style: ultrawave, repeat: true}</code
-        ></span
-      >
-      <p>
-        If you are using this method, remember to JSON.stringify() when you
-        append it to the FormData.
-      </p>
-      <h2>examples</h2>
+      <table>
+        <thead>
+          <tr><th colspan=2>examples</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>URL query</td>
+            <td>https://imgscatter.vercel.app/scatter?grid=2&style=ride&repeat=false</td>
+          </tr>
+          <tr>
+            <td rowspan="2">object</td>
+            <td>{grid: 6, style: ultrawave, repeat: true}</td>
+          </tr>
+          <tr>
+            <td>     <i>If you are using this method, remember to JSON.stringify() when you
+              append it to FormData.</i></td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>request example in js</h2>
       <div class="showcode">
         <pre><code>async function getImage() {
   const sendForm = new FormData();
@@ -130,10 +129,11 @@
 
   //Then you can do as you wish with the response, for example
   const data = await response.text();
-  //and then set this as the source of an image in your DOM
-  //to display the glitched image.
+  //and then set this as the source in a DOM element
+  //to display the resulting image.
 }</code></pre>
       </div>
     </div>
+    <br>
   </body>
 </html>
