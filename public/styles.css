@@ -42,6 +42,10 @@ form {
   margin-bottom: 0.5rem;
 }
 
+.slider {
+  vertical-align: middle;
+}
+
 #result {
   margin-top: 1.5rem;
 }

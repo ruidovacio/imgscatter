@@ -5,11 +5,16 @@ let canUpload = false;
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
+  let style = "";
   if (canUpload) {
     const gridSize = document.getElementById("grid").value;
-    const style = document.querySelector(
-      'input[type="radio"][name="style"]:checked'
-    ).value;
+    try {
+      style = document.querySelector(
+        'input[type="radio"][name="style"]:checked'
+      ).value;
+    } catch (err) {
+      style = undefined;
+    }
     const checkboxes = form.querySelectorAll(
       'input[type="checkbox"][name="options"]'
     );
@@ -32,6 +37,11 @@ image.addEventListener("change", (event) => {
   }
 });
 
+grid.addEventListener("change", (event) => {
+  const newValue = event.target.value;
+  document.getElementById("gridtext").innerHTML = `grid size: ${newValue}x${newValue}`;
+});
+
 async function scatterImage(imageFile, url) {
   const formData = new FormData();
   formData.append("image", imageFile);
@@ -42,7 +52,7 @@ async function scatterImage(imageFile, url) {
   const data = await response.text();
   const createdImage = document.createElement("img");
   createdImage.src = data;
-  createdImage.classList.add("resultimage")
+  createdImage.classList.add("resultimage");
   result.innerHTML = "";
   result.appendChild(createdImage);
 }

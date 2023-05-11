@@ -21,7 +21,7 @@
       <div class="input">
         <form method="post" enctype="multipart/form-data" id="form">
           <input type="file" id="imageSource" name="imageSource" accept="image/*" /><br>
-          <input type="radio" id="style1" name="style" value="scatter">
+          <input type="radio" id="style1" name="style" value="scatter" checked>
           <label for="style1">scatter</label>
           <input type="radio" id="style2" name="style" value="begotten">
           <label for="style2">begotten</label>
@@ -31,13 +31,14 @@
           <label for="style4">ultrawave</label>
           <input type="radio" id="style5" name="style" value="ride">
           <label for="style5">ride</label><br>
-          <input class="slider" type="range" min=2 max=6 value=3  id="grid"><br>
+          <input class="slider" type="range" min=2 max=6 value=3  id="grid">
+          <label for="slider" id="gridtext">grid size: 3x3</label><br>
           <input type="checkbox" id="option1" name="options" value="repeat">
-          <label for="option1">repeat</label><br>
-          <input type="submit" value="upload" id="upload" />
+          <label for="option1">repeat slices</label><br>
+          <input type="submit" value="upload" id="upload"/>
         </form>
       </div>
-      <p id="warning" class="warning">The image should be less than 1mb.</p>
+      <p id="warning" class="warning">[the image should be less than 1mb]</p>
       <div id="result"></div>
     </div>
     <script src="./main.js"></script>
